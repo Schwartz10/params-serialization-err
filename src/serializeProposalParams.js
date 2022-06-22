@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useWasm } from "./WasmLoader";
 
 export function SerializeProposal() {
-  const { wasm } = useWasm();
+  const { serializeParams } = useWasm();
   const [serializedParams, setSerializedParams] = useState("");
   const [err, setErr] = useState("");
 
@@ -13,9 +13,10 @@ export function SerializeProposal() {
     };
 
     try {
-      const serialized = wasm.serializeParams(params);
+      const serialized = serializeParams(params);
       setSerializedParams(serialized.toString());
     } catch (err) {
+      console.log("err", err);
       setErr(JSON.stringify(err));
     }
   };
